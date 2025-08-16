@@ -23,7 +23,24 @@ This repository contains a comprehensive collection of specialized AI agents for
 
 ### Installation
 
-To use these agents with Claude Code, copy the agent definition files to your project's `.claude/agents/` directory:
+To use these agents with Claude Code, you have multiple installation options:
+
+#### Option 1: Easy Installation with Script
+
+For the easiest installation, use our provided script which will install all collections:
+
+```bash
+curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash
+```
+
+This script will guide you through installing collections to either:
+- Global location (`~/.claude/agents`) - Available to all projects
+- Local project location (`./.claude/agents`) - Available only to the current project
+- Both locations
+
+#### Option 2: Manual Installation
+
+To manually install the agent definition files, copy them to your project's `.claude/agents/` directory:
 
 ```bash
 mkdir -p .claude/agents
@@ -75,7 +92,24 @@ Claude Code will automatically delegate to the appropriate agent based on the ta
 
 ### 安装
 
-要将这些代理与Claude Code一起使用，请将代理定义文件复制到项目的`.claude/agents/`目录：
+要将这些代理与Claude Code一起使用，您有多种安装选项：
+
+#### 选项1：通过脚本快速安装
+
+最简单的安装方式是使用我们提供的脚本，它将安装所有集合：
+
+```bash
+curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash
+```
+
+该脚本将引导您将集安装到以下位置之一：
+- 全局位置 (`~/.claude/agents`) - 所有项目可用
+- 本地项目位置 (`./.claude/agents`) - 仅当前项目可用
+- 两个位置都安装
+
+#### 选项2：手动安装
+
+要手动安装代理定义文件，请将它们复制到项目的`.claude/agents/`目录：
 
 ```bash
 mkdir -p .claude/agents
