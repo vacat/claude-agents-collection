@@ -33,7 +33,23 @@ For the easiest installation, use our provided script which will install all col
 curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash
 ```
 
-This script will guide you through installing collections to either:
+The script now supports multiple execution modes:
+
+1. **Piped execution** (as shown above) - Automatically installs to global location
+2. **Direct execution with options**:
+   ```bash
+   # Download and run with specific options
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s global
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s local
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s both
+   
+   # Or download and run directly
+   wget https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh
+   chmod +x install.sh
+   ./install.sh global  # or local, or both
+   ```
+
+When run directly, the script will guide you through installing collections to either:
 - Global location (`~/.claude/agents`) - Available to all projects
 - Local project location (`./.claude/agents`) - Available only to the current project
 - Both locations
@@ -102,7 +118,23 @@ Claude Code will automatically delegate to the appropriate agent based on the ta
 curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash
 ```
 
-该脚本将引导您将集安装到以下位置之一：
+该脚本现在支持多种执行模式：
+
+1. **管道执行**（如上所示）- 自动安装到全局位置
+2. **带选项的直接执行**：
+   ```bash
+   # 下载并使用特定选项运行
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s global
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s local
+   curl -s https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh | bash -s both
+   
+   # 或者下载后直接运行
+   wget https://raw.githubusercontent.com/vacat/claude-agents-collection/main/install.sh
+   chmod +x install.sh
+   ./install.sh global  # 或 local, 或 both
+   ```
+
+直接运行时，该脚本将引导您将集安装到以下位置之一：
 - 全局位置 (`~/.claude/agents`) - 所有项目可用
 - 本地项目位置 (`./.claude/agents`) - 仅当前项目可用
 - 两个位置都安装
