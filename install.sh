@@ -77,43 +77,110 @@ install_all_collections() {
     echo "All collections installation completed!"
 }
 
-# Main installation prompt
-echo "Where would you like to install the agent collections?"
-echo "1) Global installation (~/.claude/agents) - Available to all projects"
-echo "2) Local installation (./.claude/agents) - Available only to this project"
-echo "3) Install all collections to both locations"
-echo
+# Function to show usage
+show_usage() {
+    echo "Usage: $0 [global|local|both]"
+    echo
+    echo "Installation options:"
+    echo "  global    Install to global location (~/.claude/agents)"
+    echo "  local     Install to local project location (./.claude/agents)"
+    echo "  both      Install to both locations"
+    echo
+    echo "If no option is provided, the script will prompt for selection."
+    echo
+}
 
-while true; do
-    read -p "Please select an option (1, 2, or 3): " choice
-    case $choice in
-        1)
+# Check if running non-interactively (piped execution)
+if [ ! -t 0 ] || [ -n "$1" ]; then
+    # Handle command line arguments
+    case "$1" in
+        global)
             TARGET_DIR="$HOME/.claude/agents"
-            echo
             echo "Installing to global location: $TARGET_DIR"
             install_all_collections "$TARGET_DIR"
-            break
             ;;
-        2)
+        local)
             TARGET_DIR="./.claude/agents"
-            echo
             echo "Installing to local project location: $TARGET_DIR"
             install_all_collections "$TARGET_DIR"
-            break
             ;;
-        3)
-            echo
+        both)
             echo "Installing to both global and local locations..."
             install_all_collections "$HOME/.claude/agents"
             echo
             install_all_collections "./.claude/agents"
-            break
+            ;;
+        -h|--help)
+            show_usage
+            exit 0
+            ;;
+        "")
+            # If no argument and not running interactively, default to global
+            if [ ! -t 0 ]; then
+                TARGET_DIR="$HOME/.claude/agents"
+                echo "Installing to global location: $TARGET_DIR"
+                install_all_collections "$TARGET_DIR"
+            else
+                # Running interactively, show prompt
+                show_prompt
+            fi
             ;;
         *)
-            echo "Invalid option. Please enter 1, 2, or 3."
+            echo "Invalid option: $1"
+            show_usage
+            exit 1
             ;;
     esac
-done
+else
+    # Interactive mode
+    show_prompt
+fi
+
+# Function to show interactive prompt
+show_prompt() {
+    echo "Where would you like to install the agent collections?"
+    echo "1) Global installation (~/.claude/agents) - Available to all projects"
+    echo "2) Local installation (./.claude/agents) - Available only to this project"
+    echo "3) Install all collections to both locations"
+    echo "4) Help"
+    echo
+
+    while true; do
+        read -p "Please select an option (1, 2, 3, or 4): " choice
+        case $choice in
+            1)
+                TARGET_DIR="$HOME/.claude/agents"
+                echo
+                echo "Installing to global location: $TARGET_DIR"
+                install_all_collections "$TARGET_DIR"
+                break
+                ;;
+            2)
+                TARGET_DIR="./.claude/agents"
+                echo
+                echo "Installing to local project location: $TARGET_DIR"
+                install_all_collections "$TARGET_DIR"
+                break
+                ;;
+            3)
+                echo
+                echo "Installing to both global and local locations..."
+                install_all_collections "$HOME/.claude/agents"
+                echo
+                install_all_collections "./.claude/agents"
+                break
+                ;;
+            4)
+                show_usage
+                show_prompt
+                return
+                ;;
+            *)
+                echo "Invalid option. Please enter 1, 2, 3, or 4."
+                ;;
+        esac
+    done
+}
 
 echo
 echo "Installation completed successfully!"
