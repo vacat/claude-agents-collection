@@ -1,0 +1,12 @@
+[submodule "contains-studio"]
+	path = contains-studio
+	url = https://github.com/contains-studio/agents
+[submodule "dl-ezo"]
+	path = dl-ezo
+	url = https://github.com/dl-ezo/agents
+[submodule "wshobson"]
+	path = wshobson
+	url = https://github.com/wshobson/agents
+[submodule "iannuttall"]
+	path = iannuttall
+	url = https://github.com/iannuttall/agents
